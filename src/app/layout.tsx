@@ -1,16 +1,20 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Outfit, Cormorant_Infant } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+// Configuração da Outfit (Sans-serif principal)
+const outfit = Outfit({
   subsets: ['latin'],
+  variable: '--font-outfit',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+// Cormorant Infant (Serif para títulos itálicos)
+const cormorant = Cormorant_Infant({
   subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  style: ['italic'],
+  variable: '--font-cormorant',
 })
 
 export const metadata: Metadata = {
@@ -20,14 +24,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${outfit.variable} ${cormorant.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
