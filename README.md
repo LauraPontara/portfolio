@@ -340,7 +340,14 @@ O portfólio será composto por quatro seções principais, acessíveis através
 ```
 portfolio/
 ├── public/                      # Arquivos públicos estáticos
-│
+├── docs/                        # Documentação e wireframes
+│   └── wireframes/              # Imagens dos protótipos do Figma
+│       ├── Home&Sobre.png
+│       ├── Projetos&Tecnologias.png
+│       ├── Experiencias.png
+│       ├── Contato.png
+│       ├── DetalhesProjeto.png
+│       └── Guestbook.png
 ├── src/
 │   ├── app/                    # App Router do Next.js
 │   │   ├── design-system/
