@@ -100,8 +100,8 @@ portfolio/
 ├── public/                      # Arquivos públicos estáticos
 │
 ├── src/
-│   └── app/                    # App Router do Next.js
-│   
+│   ├── app/                    # App Router do Next.js
+│   │   │   
 │   │   ├── globals.css         # Estilos globais e variáveis CSS
 │   │   ├── layout.tsx          # Layout principal da aplicação
 │   │   └── page.tsx            # Página inicial (home)
