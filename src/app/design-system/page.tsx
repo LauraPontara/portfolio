@@ -297,6 +297,8 @@ export default function DesignSystemPage() {
                 forma geral. Excelente legibilidade em tamanhos pequenos e
                 grandes.
               </p>
+              Não utilizar com itálico para preservar sua clareza e
+              simplicidade.
               <div className="mt-4 flex flex-wrap gap-3">
                 {[300, 400, 500, 600, 700, 800].map((w) => (
                   <span

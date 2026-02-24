@@ -43,8 +43,8 @@ const translations = {
 
 const navItemClass = cn(
   'text-tx-secondary hover:text-tx-primary',
-  'rounded-md px-3 py-1.5 text-sm font-medium',
-  'transition-colors duration-150 hover:bg-white/5',
+  'rounded-full px-3 py-1.5 text-sm font-medium',
+  'transition-colors duration-150 hover:/5',
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border',
 )
 
@@ -65,11 +65,11 @@ export function Navbar() {
             href="/"
             className="font-title text-tx-primary text-xl font-bold italic transition-opacity hover:opacity-80"
           >
-            SN
+            Carlos Silva
           </Link>
 
           <NavigationMenu viewport={false}>
-            <NavigationMenuList className="border-border/50 bg-card/50 gap-0 rounded-full border px-1 py-1 backdrop-blur-md">
+            <NavigationMenuList className="gap-0 rounded-full px-1 py-1">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link href="/#about" className={navItemClass}>
@@ -139,14 +139,14 @@ export function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-8">
+            <AnimatedThemeToggler className="text-tx-secondary hover:text-tx-primary flex h-8 w-8 items-center justify-center rounded-full transition-colors [&_svg]:size-5" />
             <LanguageToggle />
-            <AnimatedThemeToggler className="text-tx-secondary hover:text-tx-primary flex h-8 w-8 items-center justify-center rounded-full transition-colors [&_svg]:size-4" />
             <Link
               href="/#contact"
-              className="from-brand-3 to-brand-5 flex items-center gap-1.5 rounded-full bg-gradient-to-r px-4 py-2 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+              className="from-brand-3 to-brand-5 flex items-center gap-1.5 rounded-full bg-gradient-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
             >
-              <Send size={12} />
+              <Send size={20} />
               {t.cta}
             </Link>
           </div>
