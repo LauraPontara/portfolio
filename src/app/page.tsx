@@ -1,4 +1,6 @@
 import { ContactForm } from '@/components'
+import { ContentSection } from '@/components/section/content-section'
+import { emailSectionTranslations } from '@/components/section/section-translations'
 import Spline from '@splinetool/react-spline/next'
 
 export default function Home() {
@@ -31,19 +33,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-background flex flex-col items-center justify-center py-12">
-        <div className="w-full max-w-2xl">
-          <div className="mb-5 text-center">
-            <h1 className="font-title text-tx-primary text-4xl font-bold italic sm:text-5xl">
-              Entre em contato
-            </h1>
-            <p className="text-tx-muted text-base">
-              Tem uma pergunta ou quer trabalhar junto? Fique à vontade!
-            </p>
-          </div>
-          <ContactForm />
-        </div>
-      </section>
+      <ContentSection
+        translations={emailSectionTranslations}
+        text_orientation="center"
+        sectionSize="small"
+      >
+        <ContactForm />
+      </ContentSection>
 
       <footer className="text-tx-muted pb-8 text-center text-xs md:text-sm">
         © 2026 • Construído com Next.js

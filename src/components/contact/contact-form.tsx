@@ -1,26 +1,99 @@
 'use client'
 
 import emailjs from '@emailjs/browser'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { z } from 'zod'
 
 import EMAILJS_CONFIG from '@/config/emailjs.config'
 import { cn } from '@/lib/utils'
+import { usePortfolioStore } from '@/store/use-portfolio-store'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
+type FieldErrors = Partial<Record<'name' | 'email' | 'message', string>>
+
+const schemas = {
+  pt: z.object({
+    name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
+    email: z.email('E-mail inválido'),
+    message: z.string().min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
+  }),
+  en: z.object({
+    name: z.string().min(2, 'Name must be at least 2 characters'),
+    email: z.email('Invalid email address'),
+    message: z.string().min(10, 'Message must be at least 10 characters'),
+  }),
+}
+
+const translations = {
+  pt: {
+    name: 'Nome',
+    namePlaceholder: 'Seu nome completo',
+    email: 'E-mail',
+    emailPlaceholder: 'seu@email.com',
+    message: 'Mensagem',
+    messagePlaceholder: 'Escreva sua mensagem...',
+    sendButton: 'Enviar mensagem',
+    messageStatusSucess:
+      '✓ Mensagem enviada com sucesso! Você receberá um e-mail de confirmação em breve.',
+    messageStatusError:
+      '✕ Ocorreu um erro ao enviar a mensagem. Tente novamente.',
+    loading: 'Enviando...',
+  },
+  en: {
+    name: 'Name',
+    namePlaceholder: 'Your full name',
+    email: 'E-mail',
+    emailPlaceholder: 'your@email.com',
+    message: 'Message',
+    messagePlaceholder: 'Write your message...',
+    sendButton: 'Send message',
+    messageStatusSucess:
+      'Message sent successfully! You will receive a confirmation email soon.',
+    messageStatusError:
+      'An error occurred while sending the message. Please try again.',
+    loading: 'Sending...',
+  },
+}
 
 export function ContactForm() {
+  const { language } = usePortfolioStore()
+  const t = translations[language]
+
   const formRef = useRef<HTMLFormElement>(null)
   const [status, setStatus] = useState<Status>('idle')
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+
+  useEffect(() => {
+    function handleOutsideClick(e: MouseEvent) {
+      if (formRef.current && !formRef.current.contains(e.target as Node)) {
+        setFieldErrors({})
+      }
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => document.removeEventListener('mousedown', handleOutsideClick)
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setStatus('loading')
 
     const form = e.currentTarget
     const name = (form.elements.namedItem('name') as HTMLInputElement).value
     const email = (form.elements.namedItem('email') as HTMLInputElement).value
     const message = (form.elements.namedItem('message') as HTMLTextAreaElement)
       .value
+
+    const result = schemas[language].safeParse({ name, email, message })
+    if (!result.success) {
+      const errors: FieldErrors = {}
+      for (const issue of result.error.issues) {
+        const field = issue.path[0] as keyof FieldErrors
+        if (!errors[field]) errors[field] = issue.message
+      }
+      setFieldErrors(errors)
+      return
+    }
+    setFieldErrors({})
+    setStatus('loading')
     const time = new Date().toLocaleString('pt-BR')
 
     const templateParams = { name, email, message, time }
@@ -50,6 +123,10 @@ export function ContactForm() {
     }
   }
 
+  function clearFieldError(field: keyof FieldErrors) {
+    setFieldErrors((prev) => ({ ...prev, [field]: undefined }))
+  }
+
   const inputBase =
     'w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-tx-primary placeholder:text-tx-muted outline-none transition-all duration-200 focus:border-ring focus:ring-2 focus:ring-ring/20 disabled:cursor-not-allowed disabled:opacity-50'
 
@@ -66,17 +143,24 @@ export function ContactForm() {
           htmlFor="name"
           className="text-tx-accent text-xs font-semibold tracking-wider uppercase"
         >
-          Nome
+          {t.name}
         </label>
         <input
           id="name"
           name="name"
           type="text"
-          required
-          placeholder="Seu nome completo"
+          placeholder={t.namePlaceholder}
           disabled={status === 'loading'}
-          className={inputBase}
+          onBlur={() => clearFieldError('name')}
+          className={cn(
+            inputBase,
+            fieldErrors.name &&
+              'border-red-500 focus:border-red-500 focus:ring-red-500/20',
+          )}
         />
+        {fieldErrors.name && (
+          <span className="text-xs text-red-500">{fieldErrors.name}</span>
+        )}
       </div>
 
       {/* Email */}
@@ -85,17 +169,24 @@ export function ContactForm() {
           htmlFor="email"
           className="text-tx-accent text-xs font-semibold tracking-wider uppercase"
         >
-          E-mail
+          {t.email}
         </label>
         <input
           id="email"
           name="email"
           type="email"
-          required
-          placeholder="seu@email.com"
+          placeholder={t.emailPlaceholder}
           disabled={status === 'loading'}
-          className={inputBase}
+          onBlur={() => clearFieldError('email')}
+          className={cn(
+            inputBase,
+            fieldErrors.email &&
+              'border-red-500 focus:border-red-500 focus:ring-red-500/20',
+          )}
         />
+        {fieldErrors.email && (
+          <span className="text-xs text-red-500">{fieldErrors.email}</span>
+        )}
       </div>
 
       {/* Mensagem */}
@@ -104,29 +195,36 @@ export function ContactForm() {
           htmlFor="message"
           className="text-tx-accent text-xs font-semibold tracking-wider uppercase"
         >
-          Mensagem
+          {t.message}
         </label>
         <textarea
           id="message"
           name="message"
-          required
           rows={5}
-          placeholder="Escreva sua mensagem..."
+          placeholder={t.messagePlaceholder}
           disabled={status === 'loading'}
-          className={cn(inputBase, 'resize-none')}
+          onBlur={() => clearFieldError('message')}
+          className={cn(
+            inputBase,
+            'resize-none',
+            fieldErrors.message &&
+              'border-red-500 focus:border-red-500 focus:ring-red-500/20',
+          )}
         />
+        {fieldErrors.message && (
+          <span className="text-xs text-red-500">{fieldErrors.message}</span>
+        )}
       </div>
 
       {/* Feedback */}
       {status === 'success' && (
         <p className="text-tx-success text-sm font-medium">
-          ✓ Mensagem enviada com sucesso! Você receberá um e-mail de confirmação
-          em breve.
+          ✓ {t.messageStatusSucess}
         </p>
       )}
       {status === 'error' && (
         <p className="text-sm font-medium text-red-500">
-          ✕ Ocorreu um erro ao enviar a mensagem. Tente novamente.
+          ✕ {t.messageStatusError}
         </p>
       )}
 
@@ -136,11 +234,12 @@ export function ContactForm() {
         disabled={status === 'loading'}
         className={cn(
           'mt-1 rounded-lg px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200',
-          'from-accent-3 to-accent-5 bg-gradient-to-r hover:opacity-90',
+          'bg-brand-5 hover:bg-brand-5/80',
           'disabled:cursor-not-allowed disabled:opacity-60',
+          'cursor-pointer',
         )}
       >
-        {status === 'loading' ? 'Enviando...' : 'Enviar mensagem'}
+        {status === 'loading' ? t.loading : t.sendButton}
       </button>
     </form>
   )

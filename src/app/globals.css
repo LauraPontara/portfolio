@@ -92,6 +92,31 @@
   --accent-5: #d5b1e7;
 }
 
+/* Cursores personalizados */
+/* Cursor base global */
+html {
+  cursor: url('/cursors/pointer.cur'), auto;
+}
+
+/* Garantir que tudo herde */
+*,
+*::before,
+*::after {
+  cursor: inherit;
+}
+
+/* Links e botões */
+a,
+button {
+  cursor: url('/cursors/link.cur'), auto;
+}
+
+/* Inputs e textarea */
+input,
+textarea {
+  cursor: url('/cursors/beam.cur'), auto;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
