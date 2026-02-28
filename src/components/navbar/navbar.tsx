@@ -16,30 +16,8 @@ import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 import { LanguageToggle } from './language-toggle'
 import { MobileMenu } from './mobile-menu'
 import { usePortfolioStore } from '@/store/use-portfolio-store'
+import { navigationTranslations } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
-
-const translations = {
-  pt: {
-    about: 'Sobre mim',
-    projects: 'Projetos',
-    experience: 'Experiências',
-    contact: 'Contato',
-    more: 'Mais',
-    guestbook: 'Mural de Visitantes',
-    guestbookDesc: 'Deixe uma mensagem no mural de visitantes',
-    cta: 'Enviar mensagem',
-  },
-  en: {
-    about: 'About me',
-    projects: 'Projects',
-    experience: 'Experience',
-    contact: 'Contact',
-    more: 'More',
-    guestbook: 'Guestbook',
-    guestbookDesc: 'Leave a message on the visitor wall',
-    cta: 'Send a message',
-  },
-}
 
 const navItemClass = cn(
   'text-tx-secondary hover:text-tx-primary',
@@ -50,7 +28,7 @@ const navItemClass = cn(
 
 export function Navbar() {
   const { language } = usePortfolioStore()
-  const t = translations[language]
+  const t = navigationTranslations[language]
 
   return (
     <>

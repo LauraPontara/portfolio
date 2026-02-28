@@ -7,26 +7,8 @@ import { User, Briefcase, Mail, BookOpen, Send, X, Menu } from 'lucide-react'
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 import { LanguageToggle } from './language-toggle'
 import { usePortfolioStore } from '@/store/use-portfolio-store'
+import { navigationTranslations } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
-
-const translations = {
-  pt: {
-    name: 'Carlos Silva',
-    about: 'Sobre mim',
-    projects: 'Projetos',
-    experience: 'Experiências',
-    contact: 'Contato',
-    cta: 'Enviar mensagem',
-  },
-  en: {
-    name: 'Carlos Silva',
-    about: 'About me',
-    projects: 'Projects',
-    experience: 'Experience',
-    contact: 'Contact',
-    cta: 'Send a message',
-  },
-}
 
 const menuVariants = {
   closed: { scale: 0.95, opacity: 0, y: -20 },
@@ -36,7 +18,7 @@ const menuVariants = {
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const { language } = usePortfolioStore()
-  const t = translations[language]
+  const t = navigationTranslations[language]
 
   return (
     <div className="fixed top-4 left-1/2 z-50 w-[calc(100vw-32px)] max-w-sm -translate-x-1/2">
@@ -52,7 +34,7 @@ export function MobileMenu() {
           </span>
           <span className="bg-border h-4 w-px" />
           <span className="text-tx-primary font-sans text-sm font-medium">
-            {t.name}
+            Carlos Silva
           </span>
         </div>
 
@@ -82,7 +64,7 @@ export function MobileMenu() {
                 { href: '/#about', label: t.about, icon: User },
                 { href: '/#projects', label: t.projects, icon: Briefcase },
                 { href: '/#contact', label: t.contact, icon: Mail },
-                { href: '/guestbook', label: 'Guestbook', icon: BookOpen },
+                { href: '/guestbook', label: t.guestbook, icon: BookOpen },
               ].map((link) => (
                 <Link
                   key={link.href}
