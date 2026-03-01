@@ -1,6 +1,11 @@
 import { notFound } from 'next/navigation'
 import { projects } from '@/constants/projects'
-import { ProjectHero } from '@/components/shared'
+import {
+  ProjectMedia,
+  ProjectInfo,
+  ProjectStats,
+  ProjectActions,
+} from '@/components/shared'
 
 /**
  * Gera os parâmetros estáticos para cada projeto.
@@ -31,7 +36,36 @@ export default async function ProjectPage({
   return (
     <main className="bg-background min-h-screen px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <ProjectHero project={project} />
+        {/* Desktop: grid 2 colunas */}
+        <section
+          aria-label="Detalhes do projeto"
+          className="hidden md:grid md:grid-cols-2 md:items-center md:gap-16"
+        >
+          <ProjectMedia project={project} />
+
+          <div className="flex flex-col gap-6">
+            <ProjectInfo project={project} />
+            {project.stats && project.stats.length > 0 && (
+              <ProjectStats stats={project.stats} />
+            )}
+            <ProjectActions project={project} />
+          </div>
+        </section>
+
+        {/* Mobile: mídia sticky + card de conteúdo em overlay */}
+        <section aria-label="Detalhes do projeto" className="md:hidden">
+          <ProjectMedia project={project} />
+
+          <div className="bg-background relative z-10 -mt-8 rounded-t-3xl px-6 pt-8 pb-16 shadow-[0_-8px_30px_rgba(0,0,0,0.12)]">
+            <div className="flex flex-col gap-6">
+              <ProjectInfo project={project} tagScrollable />
+              {project.stats && project.stats.length > 0 && (
+                <ProjectStats stats={project.stats} />
+              )}
+              <ProjectActions project={project} />
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   )
