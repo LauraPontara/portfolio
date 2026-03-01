@@ -1,4 +1,7 @@
 import Spline from '@splinetool/react-spline/next'
+import { ContactForm } from '@/components'
+import { ContentSection } from '@/components/section/content-section'
+import { emailSectionTranslations } from '@/components/section/section-translations'
 
 export default function Home() {
   return (
@@ -34,6 +37,18 @@ export default function Home() {
           </div>
         </main>
       </section>
+
+      <ContentSection
+        translations={emailSectionTranslations}
+        textOrientation="center"
+        sectionSize="small"
+      >
+        <ContactForm />
+      </ContentSection>
+
+      <footer className="text-tx-muted pb-8 text-center text-xs md:text-sm">
+        © 2026 • Construído com Next.js
+      </footer>
     </div>
   )
 }
