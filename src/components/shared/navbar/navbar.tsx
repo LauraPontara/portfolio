@@ -90,7 +90,7 @@ export function Navbar() {
                 >
                   {t.more}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-border/50 bg-card/95 mt-2 min-w-[220px] rounded-xl border p-2 shadow-lg backdrop-blur-md">
+                <NavigationMenuContent className="border-border/50 bg-card/95 mt-2 min-w-55 rounded-xl border p-2 shadow-lg backdrop-blur-md">
                   <NavigationMenuLink asChild>
                     <Link
                       href="/guestbook"
@@ -122,7 +122,7 @@ export function Navbar() {
             <LanguageToggle />
             <Link
               href="/#contact"
-              className="from-brand-3 to-brand-5 flex items-center gap-1.5 rounded-full bg-gradient-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+              className="from-brand-3 to-brand-5 flex items-center gap-1.5 rounded-full bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
             >
               <Send size={20} />
               {t.cta}

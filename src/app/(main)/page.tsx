@@ -15,7 +15,7 @@ export default function Home() {
         </div>
 
         {/* Conteúdo da Headline*/}
-        <main className="pointer-events-none relative z-10 mx-auto flex h-full max-w-[1400px] flex-col items-center px-6 pt-24 lg:grid lg:grid-cols-3 lg:items-center lg:px-16 lg:pt-0">
+        <main className="pointer-events-none relative z-10 mx-auto flex h-full max-w-350 flex-col items-center px-6 pt-24 lg:grid lg:grid-cols-3 lg:items-center lg:px-16 lg:pt-0">
           <div className="flex flex-col items-center justify-center text-center lg:items-start lg:self-start lg:pt-32 lg:text-left">
             <h1 className="text-tx-primary pointer-events-auto text-3xl leading-[1.1] font-bold tracking-tighter sm:text-4xl md:text-4xl lg:text-5xl xl:text-7xl">
               Olá, eu sou <br className="hidden lg:block" /> Carlos Silva

@@ -1,9 +1,12 @@
-// ─── Navigation Translations ─────────────────────────────────────────────────
-// Single source of truth for navbar + footer link labels and section headings.
+/**
+ * Traduções de navegação
+ *
+ * Fonte única de verdade para os rótulos do `navbar` e do `footer`.
+ */
 
 export const navigationTranslations = {
   pt: {
-    // ── Navbar ──────────────────────────────────────────────────────────────
+    // ── Navegação ──────────────────────────────────────────
     about: 'Sobre mim',
     projects: 'Projetos',
     experience: 'Experiências',
@@ -11,13 +14,13 @@ export const navigationTranslations = {
     more: 'Mais',
     cta: 'Enviar mensagem',
 
-    // ── Dropdown / Footer Resources ─────────────────────────────────────────
+    // ── Dropdown / Recursos do rodapé ───────────────────────────────────────
     guestbook: 'Mural de Visitantes',
     guestbookDesc: 'Deixe uma mensagem no mural de visitantes',
     githubActivity: 'Atividades no GitHub',
     githubActivityDesc: 'Veja minha linha do tempo de contribuições',
 
-    // ── Footer ──────────────────────────────────────────────────────────────
+    // ── Rodapé ───────────────────────────────────────────────────
     footerHeadline: 'Vamos construir algo',
     footerHighlight: 'incrível',
     footerHeadlineEnd: 'juntos?',
@@ -30,7 +33,7 @@ export const navigationTranslations = {
   },
 
   en: {
-    // ── Navbar ──────────────────────────────────────────────────────────────
+    // ── Navegação ──────────────────────────────────────────
     about: 'About me',
     projects: 'Projects',
     experience: 'Experience',
@@ -38,13 +41,13 @@ export const navigationTranslations = {
     more: 'More',
     cta: 'Send a message',
 
-    // ── Dropdown / Footer Resources ─────────────────────────────────────────
+    // ── Dropdown / Recursos do rodapé ───────────────────────────────────────
     guestbook: 'Guestbook',
     guestbookDesc: 'Leave a message on the visitor wall',
     githubActivity: 'GitHub Activity',
     githubActivityDesc: 'See my contribution timeline',
 
-    // ── Footer ──────────────────────────────────────────────────────────────
+    // ── Rodapé ───────────────────────────────────────────────────
     footerHeadline: "Let's build something",
     footerHighlight: 'amazing',
     footerHeadlineEnd: 'together?',
