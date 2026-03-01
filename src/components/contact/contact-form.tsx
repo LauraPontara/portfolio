@@ -7,6 +7,10 @@ import { z } from 'zod'
 import EMAILJS_CONFIG from '@/config/emailjs.config'
 import { cn } from '@/lib/utils'
 import { usePortfolioStore } from '@/store/use-portfolio-store'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 type FieldErrors = Partial<Record<'name' | 'email' | 'message', string>>
@@ -127,9 +131,6 @@ export function ContactForm() {
     setFieldErrors((prev) => ({ ...prev, [field]: undefined }))
   }
 
-  const inputBase =
-    'w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-tx-primary placeholder:text-tx-muted outline-none transition-all duration-200 focus:border-ring focus:ring-2 focus:ring-ring/20 disabled:cursor-not-allowed disabled:opacity-50'
-
   return (
     <form
       ref={formRef}
@@ -139,23 +140,23 @@ export function ContactForm() {
     >
       {/* Nome */}
       <div className="flex flex-col gap-1.5">
-        <label
+        <Label
           htmlFor="name"
           className="text-tx-accent text-xs font-semibold tracking-wider uppercase"
         >
           {t.name}
-        </label>
-        <input
+        </Label>
+        <Input
           id="name"
           name="name"
           type="text"
           placeholder={t.namePlaceholder}
           disabled={status === 'loading'}
           onBlur={() => clearFieldError('name')}
+          aria-invalid={!!fieldErrors.name}
           className={cn(
-            inputBase,
             fieldErrors.name &&
-              'border-red-500 focus:border-red-500 focus:ring-red-500/20',
+              'border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/20',
           )}
         />
         {fieldErrors.name && (
@@ -165,23 +166,23 @@ export function ContactForm() {
 
       {/* Email */}
       <div className="flex flex-col gap-1.5">
-        <label
+        <Label
           htmlFor="email"
           className="text-tx-accent text-xs font-semibold tracking-wider uppercase"
         >
           {t.email}
-        </label>
-        <input
+        </Label>
+        <Input
           id="email"
           name="email"
           type="email"
           placeholder={t.emailPlaceholder}
           disabled={status === 'loading'}
           onBlur={() => clearFieldError('email')}
+          aria-invalid={!!fieldErrors.email}
           className={cn(
-            inputBase,
             fieldErrors.email &&
-              'border-red-500 focus:border-red-500 focus:ring-red-500/20',
+              'border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/20',
           )}
         />
         {fieldErrors.email && (
@@ -191,24 +192,24 @@ export function ContactForm() {
 
       {/* Mensagem */}
       <div className="flex flex-col gap-1.5">
-        <label
+        <Label
           htmlFor="message"
           className="text-tx-accent text-xs font-semibold tracking-wider uppercase"
         >
           {t.message}
-        </label>
-        <textarea
+        </Label>
+        <Textarea
           id="message"
           name="message"
           rows={5}
           placeholder={t.messagePlaceholder}
           disabled={status === 'loading'}
           onBlur={() => clearFieldError('message')}
+          aria-invalid={!!fieldErrors.message}
           className={cn(
-            inputBase,
             'resize-none',
             fieldErrors.message &&
-              'border-red-500 focus:border-red-500 focus:ring-red-500/20',
+              'border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/20',
           )}
         />
         {fieldErrors.message && (
@@ -229,18 +230,17 @@ export function ContactForm() {
       )}
 
       {/* Botão */}
-      <button
+      <Button
         type="submit"
         disabled={status === 'loading'}
         className={cn(
-          'mt-1 rounded-lg px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200',
+          'mt-1 rounded-lg px-6 py-3 text-sm font-semibold tracking-wide text-white',
           'bg-brand-5 hover:bg-brand-5/80',
-          'disabled:cursor-not-allowed disabled:opacity-60',
-          'cursor-pointer',
         )}
+        size="lg"
       >
         {status === 'loading' ? t.loading : t.sendButton}
-      </button>
+      </Button>
     </form>
   )
 }

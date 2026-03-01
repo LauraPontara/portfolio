@@ -11,7 +11,7 @@ type Props = {
   description?: string
   children: React.ReactNode
   titleClassName?: string
-  text_orientation: 'left' | 'center' | 'right'
+  textOrientation: 'left' | 'center' | 'right'
   translations?: SectionTranslations
   sectionSize: 'small' | 'medium' | 'large'
 }
@@ -21,7 +21,7 @@ export function ContentSection({
   description,
   children,
   titleClassName,
-  text_orientation,
+  textOrientation,
   translations,
   sectionSize,
 }: Props) {
@@ -39,7 +39,7 @@ export function ContentSection({
   return (
     <section className="bg-background flex flex-col items-center justify-center px-6 py-12">
       <div className={`w-full ${sectionSizeClass}`}>
-        <div className={`mb-5 text-${text_orientation || 'center'}`}>
+        <div className={`mb-5 text-${textOrientation || 'center'}`}>
           <h1
             className={`font-title text-tx-primary text-4xl font-bold italic sm:text-5xl ${titleClassName || ''}`}
           >

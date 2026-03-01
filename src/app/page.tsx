@@ -35,7 +35,7 @@ export default function Home() {
 
       <ContentSection
         translations={emailSectionTranslations}
-        text_orientation="center"
+        textOrientation="center"
         sectionSize="small"
       >
         <ContactForm />

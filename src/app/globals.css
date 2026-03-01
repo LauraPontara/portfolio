@@ -24,6 +24,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-muted-foreground: var(--muted-foreground);
 
   /* Cores de Texto Dinâmicas */
   --color-tx-primary: var(--tx-primary);
@@ -51,7 +53,9 @@
   --primary: #77309a;
   --primary-foreground: #ffffff;
   --border: #dcdcdc;
-  --ring: #3068cd;
+  --ring: #77309a;
+  --input: #e5e5e5;
+  --muted-foreground: #525252;
 
   /* TEXTOS LIGHT */
   --tx-primary: #171717;
@@ -76,6 +80,8 @@
   --card-foreground: #ffffff;
   --border: #171717;
   --ring: #77309a;
+  --input: #262626;
+  --muted-foreground: #737373;
 
   /* TEXTOS DARK */
   --tx-primary: #ffffff;
