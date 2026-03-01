@@ -55,8 +55,13 @@ type WithPlayStore = MobileProjectLinksBase & { playStore: string }
 
 export type MobileProjectLinks = WithAppleStore | WithPlayStore
 
+export interface MobileHeroMedia {
+  devices: [ProjectThumbnail, ProjectThumbnail, ProjectThumbnail]
+}
+
 export interface MobileProject extends ProjectBase {
   category: 'mobile'
+  thumbnail: ProjectThumbnail | MobileHeroMedia
   links: MobileProjectLinks
 }
 

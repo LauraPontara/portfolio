@@ -7,59 +7,36 @@ import type { Project } from '@/types/project'
  * tipada pelo tipo discriminado `Project`, garantindo que apenas os campos
  * válidos por categoria sejam utilizados.
  */
+
 export const projects: Project[] = [
-  // ── Projetos Web ───────────────────────────────────────────────────────────
   {
     id: '1',
-    slug: 'portfolio',
+    slug: 'portfolio-web',
     title: 'Portfolio Pessoal',
-    description:
-      'Site de portfólio construído com Next.js 15, Tailwind CSS v4 e Spline 3D.',
+    description: 'Site construído com Next.js 15 e Tailwind v4.',
     category: 'web',
-    thumbnail: {
-      type: 'image',
-      url: '/thumbnails/portfolio.png',
-    },
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Spline'],
-    links: {
-      github: 'https://github.com/carlossilva/portfolio',
-      website: 'https://carlossilva.dev',
-    },
-    stats: [
-      { label: 'Lighthouse', value: '100' },
-      { label: 'Componentes', value: '30+' },
-    ],
+    thumbnail: { type: 'image', url: 'https://placehold.co/600x400' },
+    tags: ['Next.js', 'React', 'Tailwind'],
+    links: { github: 'https://github.com', website: 'https://meusite.com' },
     featured: true,
   },
-
-  // ── Projetos Mobile ─────────────────────────────────────────────────--------
   {
     id: '2',
     slug: 'finance-app',
     title: 'Finance App',
-    description:
-      'Aplicativo de finanças pessoais com React Native e Expo, disponível em ambas as lojas.',
+    description: 'Controle financeiro completo com visual imersivo.',
     category: 'mobile',
     thumbnail: {
-      type: 'video',
-      url: '/thumbnails/finance-app.mp4',
+      devices: [
+        {
+          type: 'video',
+          url: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        },
+        { type: 'image', url: 'https://placehold.co/600x400' },
+        { type: 'image', url: 'https://placehold.co/600x400' },
+      ],
     },
-    tags: ['React Native', 'Expo', 'TypeScript'],
-    links: {
-      github: 'https://github.com/carlossilva/finance-app',
-      appleStore: 'https://apps.apple.com/app/finance-app',
-      playStore: 'https://play.google.com/store/apps/finance-app',
-    },
-    stats: [
-      { label: 'Downloads', value: '5k+' },
-      { label: 'Avaliação', value: '4.8 ★' },
-    ],
-    featured: true,
+    tags: ['React Native', 'Expo', 'Supabase'],
+    links: { appleStore: 'https://apple.com', playStore: 'https://google.com' },
   },
 ]
-
-/**
- * Retorna apenas os projetos marcados como `featured`, útil para a seção de
- * destaque na página inicial.
- */
-export const featuredProjects = projects.filter((p) => p.featured)
